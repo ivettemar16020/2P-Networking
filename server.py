@@ -5,13 +5,14 @@ def accept_incoming_connections():
     while True:
         client, client_address = SERVER.accept()
         print("%s:%s Se a conectado." % client_address)
-        client.send(bytes("Bienvenido al juego", "utf8"))
+        client.send(bytes("Bienvenido al juego! Ingrese su nombre de usuario", "utf8"))
         addresses[client] = client_address
         Thread(target=handle_client, args=(client,)).start()
 
-def handle_client(client):  # Takes client socket as argument.
+def handle_client(client):  
     name = client.recv(BUFSIZ).decode("utf8")
-    welcome = 'Bienvenido %s! Si desea salir escriba {quit} ' % name
+    print("usuario conectado", name)
+    welcome = 'Bienvenido %s! Si desea salir escriba {quit} si desea comenzar el juego escrita {start}' % name
     client.send(bytes(welcome, "utf8"))
     msg = "%s Se a unido al juego!" % name
     broadcast(bytes(msg, "utf8"))
@@ -19,6 +20,7 @@ def handle_client(client):  # Takes client socket as argument.
 
     while True:
         msg = client.recv(BUFSIZ)
+        print("mensaje recibidio",msg, "de:", name)
         if msg != bytes("{quit}", "utf8"):
             broadcast(msg, name+": ")
         else:
