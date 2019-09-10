@@ -13,6 +13,9 @@ deck = generate_deck()
 # inicializar deck
 sampled_deck = deck
 card_images = {}
+
+contador = 0
+
 # Carga todas las imagenes del diccionario
 for card in deck:
     image = Image.open("cartas/" + card.getNameForImage() + ".png")
@@ -26,12 +29,18 @@ def accept_incoming_connections():
         client.send(bytes("Bienvenido al juego! Ingrese su nombre de usuario", "utf8"))
         addresses[client] = client_address
         Thread(target=handle_client, args=(client,)).start()
+        
 
 def handle_client(client):  
+    global contador
+    print("numero de clientes",contador) 
     name = client.recv(BUFSIZ).decode("utf8")
     print("usuario conectado", name)
     welcome = 'Bienvenido %s! Si desea salir escriba {quit} si desea comenzar el juego escrita {start}' % name
     client.send(bytes(welcome, "utf8"))
+    if (contador <= contador):
+        contador = contador + 1
+        print(contador)
     msg = "%s Se a unido al juego!" % name
     broadcast(bytes(msg, "utf8"))
     clients[client] = name
