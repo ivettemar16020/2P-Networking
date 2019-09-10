@@ -48,7 +48,8 @@ def handle_client(client):
         listo_para_jugar = input("Presiona j para determinar que ya estas listo para jugar: ")
         if listo_para_jugar == "j":
             cartas = ["2C", "2D", "2H", "2S", "3C", "3D", "3H", "3S", "4C", "4D", "4H", "4S", "5C", "5D", "5H", "5S", "6C", "6D", "6H", "6S", "7C", "7D", "7H", "7S", "8C", "8D", "8H", "8S", "9C", "9D", "9H", "9S", "10C", "10D", "10H", "10S", "AC", "AD","AH", "AS", "JC", "JD", "JH", "JS", "KC", "KD", "KH", "KS", "QC", "QD", "QH", "QS"]
-            print(' '.join(cartas)) 
+            print(' '.join(cartas))
+            print(contador) 
         msg = client.recv(BUFSIZ)
         print("mensaje recibidio",msg, "de:", name)
         if msg != bytes("{quit}", "utf8"):
@@ -171,7 +172,8 @@ class CardShuffler:
             y_add += (110 if y_counter % 10 == 0 else 0)
         
 if __name__ == "__main__":
-    CardShuffler().root.mainloop()
+    #interfaz grafica del server comentado
+    #CardShuffler().root.mainloop()
     SERVER.listen(5)
     print("Esperando jugadores...")
     ACCEPT_THREAD = Thread(target=accept_incoming_connections)
