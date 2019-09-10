@@ -57,9 +57,13 @@ def handle_client(client):
                 print("necesitas mas jugadores")
             if contador == 2:
                 jugador1 = cartas[0:4]
+                jugador1 = (' '.join(jugador1))
                 print("jugador1", jugador1)
+                client.send(bytes(jugador1,"utf8" ))
                 jugador2 = cartas[4:8]
+                jugador2 = (' '.join(jugador2))
                 print("jugador2", jugador2)
+                client.send(bytes(jugador1,"utf8" ))
             if contador == 3:
                 jugador1 = cartas[0:4]
                 print("jugador1", jugador1)
