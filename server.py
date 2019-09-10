@@ -52,7 +52,22 @@ def handle_client(client):
             print(' '.join(cartas))
             random.shuffle(cartas)
             print("REVOLVIENDO CARTAS...",cartas)
-            print(contador) 
+            print(contador)
+            if contador == 1:
+                print("necesitas mas jugadores")
+            if contador == 2:
+                jugador1 = cartas[0:4]
+                print("jugador1", jugador1)
+                jugador2 = cartas[4:8]
+                print("jugador2", jugador2)
+            if contador == 3:
+                jugador1 = cartas[0:4]
+                print("jugador1", jugador1)
+                jugador2 = cartas[4:8]
+                print("jugador2", jugador2)
+                jugador3 = cartas[8:12]
+                print("jugador3", jugador3)
+            #me da pereza hacer mas 
         msg = client.recv(BUFSIZ)
         print("mensaje recibidio",msg, "de:", name)
         if msg != bytes("{quit}", "utf8"):
