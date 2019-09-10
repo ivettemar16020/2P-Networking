@@ -9,6 +9,7 @@ from tkinter import ttk
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image, ImageTk
+import random
 deck = generate_deck()
 # inicializar deck
 sampled_deck = deck
@@ -49,6 +50,8 @@ def handle_client(client):
         if listo_para_jugar == "j":
             cartas = ["2C", "2D", "2H", "2S", "3C", "3D", "3H", "3S", "4C", "4D", "4H", "4S", "5C", "5D", "5H", "5S", "6C", "6D", "6H", "6S", "7C", "7D", "7H", "7S", "8C", "8D", "8H", "8S", "9C", "9D", "9H", "9S", "10C", "10D", "10H", "10S", "AC", "AD","AH", "AS", "JC", "JD", "JH", "JS", "KC", "KD", "KH", "KS", "QC", "QD", "QH", "QS"]
             print(' '.join(cartas))
+            random.shuffle(cartas)
+            print("REVOLVIENDO CARTAS...",cartas)
             print(contador) 
         msg = client.recv(BUFSIZ)
         print("mensaje recibidio",msg, "de:", name)
@@ -66,6 +69,7 @@ def broadcast(msg, prefix=""):
         sock.send(bytes(prefix, "utf8")+msg)
 clients = {}
 addresses = {}
+#HOST = '192.168.1.17' con el ifconfig de mi computadora
 HOST = '127.0.0.1'
 PORT = 33000
 BUFSIZ = 1024
@@ -73,6 +77,7 @@ ADDR = (HOST, PORT)
 
 SERVER = socket(AF_INET, SOCK_STREAM)
 SERVER.bind(ADDR)
+#clase para interfaz grafica actualmente no se esta utilizando
 class CardShuffler:
     root = tk.Tk()
     sampled_deck = deck

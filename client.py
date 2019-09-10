@@ -35,6 +35,7 @@ entry_field.pack()
 send_button = tkinter.Button(top, text="Send", command=send)
 send_button.pack()
 top.protocol("WM_DELETE_WINDOW", on_closing)
+#HOST = '192.168.1.17' con el ipconfig de mi compu para conectarnos 
 HOST = '127.0.0.1'
 PORT = 33000
 if not PORT:
