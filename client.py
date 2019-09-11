@@ -1,11 +1,110 @@
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
+from PIL import ImageTk, Image
 import tkinter
 def receive():
     while True:
         try:
             msg = client_socket.recv(BUFSIZ).decode("utf8")
             msg_list.insert(tkinter.END, msg)
+            print(msg)
+            if "2C" in msg:
+                img =  Image.open("cartas/2C.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel = tkinter.Label(top, image = photo)
+                panel.pack()
+            if "2D" in msg:
+                img =  Image.open("cartas/2D.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel2 = tkinter.Label(top, image = photo)
+                panel2.pack()
+            if "2H" in msg:
+                img =  Image.open("cartas/2H.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel3 = tkinter.Label(top, image = photo)
+                panel3.pack()
+            if "2S" in msg:
+                img =  Image.open("cartas/2S.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel4 = tkinter.Label(top, image = photo)
+                panel4.pack()
+            if "3C" in msg:
+                img =  Image.open("cartas/3C.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel5 = tkinter.Label(top, image = photo)
+                panel5.pack()
+            if "3D" in msg:
+                img =  Image.open("cartas/3D.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel6 = tkinter.Label(top, image = photo)
+                panel6.pack()
+            if "3H" in msg:
+                img =  Image.open("cartas/3H.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel7 = tkinter.Label(top, image = photo)
+                panel7.pack()
+            if "3S" in msg:
+                img =  Image.open("cartas/3S.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel8 = tkinter.Label(top, image = photo)
+                panel8.pack()
+            if "4C" in msg:
+                img =  Image.open("cartas/4C.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel9 = tkinter.Label(top, image = photo)
+                panel9.pack()
+            if "4D" in msg:
+                img =  Image.open("cartas/4D.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel10 = tkinter.Label(top, image = photo)
+                panel10.pack()
+            if "4H" in msg:
+                img =  Image.open("cartas/4H.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel11 = tkinter.Label(top, image = photo)
+                panel11.pack()
+            if "4S" in msg:
+                img =  Image.open("cartas/4S.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel12 = tkinter.Label(top, image = photo)
+                panel12.pack()
+            if "5C" in msg:
+                img =  Image.open("cartas/5C.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel13 = tkinter.Label(top, image = photo)
+                panel13.pack()
+            if "5D" in msg:
+                img =  Image.open("cartas/5D.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel14 = tkinter.Label(top, image = photo)
+                panel14.pack()
+            if "5H" in msg:
+                img =  Image.open("cartas/5H.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel15 = tkinter.Label(top, image = photo)
+                panel15.pack()
+            if "5S" in msg:
+                img =  Image.open("cartas/5S.png")
+                img = img.resize((150, 150), Image.ANTIALIAS)
+                photo = tkinter.PhotoImage(file="ArtWrk.ppm") 
+                panel16 = tkinter.Label(top, image = photo)
+                panel16.pack()
+            
         except OSError:  
             break
 def send(event=None):  
