@@ -22,7 +22,11 @@ for card in deck:
     image = Image.open("cartas/" + card.getNameForImage() + ".png")
     image = image.resize((70, 100), Image.ANTIALIAS)
     card_images.update({card.getNameForImage() : image})
-
+global cartas
+cartas = ["2C", "2D", "2H", "2S", "3C", "3D", "3H", "3S", "4C", "4D", "4H", "4S", "5C", "5D", "5H", "5S", "6C", "6D", "6H", "6S", "7C", "7D", "7H", "7S", "8C", "8D", "8H", "8S", "9C", "9D", "9H", "9S", "10C", "10D", "10H", "10S", "AC", "AD","AH", "AS", "JC", "JD", "JH", "JS", "KC", "KD", "KH", "KS", "QC", "QD", "QH", "QS"]
+print(' '.join(cartas))
+random.shuffle(cartas)
+print("REVOLVIENDO CARTAS...",cartas)
 def accept_incoming_connections():
     while True:
         client, client_address = SERVER.accept()
@@ -46,31 +50,23 @@ def handle_client(client):
     broadcast(bytes(msg, "utf8"))
     clients[client] = name
     while True:
-        listo_para_jugar = input("Presiona j para determinar que ya estas listo para jugar: ")
-        if listo_para_jugar == "j":
-            cartas = ["2C", "2D", "2H", "2S", "3C", "3D", "3H", "3S", "4C", "4D", "4H", "4S", "5C", "5D", "5H", "5S", "6C", "6D", "6H", "6S", "7C", "7D", "7H", "7S", "8C", "8D", "8H", "8S", "9C", "9D", "9H", "9S", "10C", "10D", "10H", "10S", "AC", "AD","AH", "AS", "JC", "JD", "JH", "JS", "KC", "KD", "KH", "KS", "QC", "QD", "QH", "QS"]
-            print(' '.join(cartas))
-            random.shuffle(cartas)
-            print("REVOLVIENDO CARTAS...",cartas)
-            print(contador)
-            jugador1 = cartas[0:4]
-            jugador1 = (' '.join(jugador1))
-            jugador2 = cartas[4:8]
-            jugador2 = (' '.join(jugador2))
-            if contador == 1:
-                client.send(bytes(jugador1,"utf8" ))
-                print("jugador1", jugador1)
-                print("necesitas mas jugadores")
-            if contador == 2:
-                print("jugador2", jugador2)
-                client.send(bytes(jugador2,"utf8" ))
-            if contador == 3:
-                jugador1 = cartas[0:4]
-                print("jugador1", jugador1)
-                jugador2 = cartas[4:8]
-                print("jugador2", jugador2)
-                jugador3 = cartas[8:12]
-                print("jugador3", jugador3)
+        print(contador)
+        jugador1 = cartas[0:4]
+        jugador1 = (' '.join(jugador1))
+        jugador2 = cartas[4:8]
+        jugador2 = (' '.join(jugador2))
+        jugador3 = cartas[8:12]
+        jugador3 = (' '.join(jugador3))
+        if contador == 1:
+            client.send(bytes(jugador1,"utf8" ))
+            print("jugador1", jugador1)
+            print("necesitas mas jugadores")
+        if contador == 2:
+            print("jugador2", jugador2)
+            client.send(bytes(jugador2,"utf8" ))
+        if contador == 3:
+            print("jugador3", jugador3)
+            client.send(bytes(jugador3,"utf8" ))
             #me da pereza hacer mas 
         msg = client.recv(BUFSIZ)
         print("mensaje recibidio",msg, "de:", name)
