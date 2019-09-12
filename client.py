@@ -136,7 +136,294 @@ def receive():
                 im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
                 valor17=tkinter.Label(top, image=im2, bd=10)
                 valor17.pack()
-            
+            if "6C" in msg:
+                imname = "cartas/6C.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor18=tkinter.Label(top, image=im2, bd=10)
+                valor18.pack()
+            if "6D" in msg:
+                imname = "cartas/6D.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor19=tkinter.Label(top, image=im2, bd=10)
+                valor19.pack()
+            if "6H" in msg:
+                imname = "cartas/6H.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor20=tkinter.Label(top, image=im2, bd=10)
+                valor20.pack()
+            if "6S" in msg:
+                imname = "cartas/6S.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor21=tkinter.Label(top, image=im2, bd=10)
+                valor21.pack()
+            if "7C" in msg:
+                imname = "cartas/7C.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor22=tkinter.Label(top, image=im2, bd=10)
+                valor22.pack()
+            if "7D" in msg:
+                imname = "cartas/7D.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor23=tkinter.Label(top, image=im2, bd=10)
+                valor23.pack()
+            if "7H" in msg:
+                imname = "cartas/7H.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor24=tkinter.Label(top, image=im2, bd=10)
+                valor24.pack()
+            if "7S" in msg:
+                imname = "cartas/7S.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor25=tkinter.Label(top, image=im2, bd=10)
+                valor25.pack()
+            if "8C" in msg:
+                imname = "cartas/8C.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor26=tkinter.Label(top, image=im2, bd=10)
+                valor26.pack()
+            if "8D" in msg:
+                imname = "cartas/8D.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor27=tkinter.Label(top, image=im2, bd=10)
+                valor27.pack()
+            if "8H" in msg:
+                imname = "cartas/8H.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor28=tkinter.Label(top, image=im2, bd=10)
+                valor28.pack()
+            if "8S" in msg:
+                imname = "cartas/8S.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor29=tkinter.Label(top, image=im2, bd=10)
+                valor29.pack()
+            if "9C" in msg:
+                imname = "cartas/9C.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor30=tkinter.Label(top, image=im2, bd=10)
+                valor30.pack()
+            if "9D" in msg:
+                imname = "cartas/9D.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor31=tkinter.Label(top, image=im2, bd=10)
+                valor31.pack()
+            if "9H" in msg:
+                imname = "cartas/9H.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor32=tkinter.Label(top, image=im2, bd=10)
+                valor32.pack()
+            if "9S" in msg:
+                imname = "cartas/9S.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor33=tkinter.Label(top, image=im2, bd=10)
+                valor33.pack()
+            if "10C" in msg:
+                imname = "cartas/9C.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor34=tkinter.Label(top, image=im2, bd=10)
+                valor34.pack()
+            if "10D" in msg:
+                imname = "cartas/10D.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor35=tkinter.Label(top, image=im2, bd=10)
+                valor35.pack()
+            if "10H" in msg:
+                imname = "cartas/10H.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor36=tkinter.Label(top, image=im2, bd=10)
+                valor36.pack()
+            if "10S" in msg:
+                imname = "cartas/AS.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor37=tkinter.Label(top, image=im2, bd=10)
+                valor37.pack()
+            if "AC" in msg:
+                imname = "cartas/AC.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor38=tkinter.Label(top, image=im2, bd=10)
+                valor38.pack()
+            if "AD" in msg:
+                imname = "cartas/AD.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor39=tkinter.Label(top, image=im2, bd=10)
+                valor39.pack()
+            if "AH" in msg:
+                imname = "cartas/AH.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor40=tkinter.Label(top, image=im2, bd=10)
+                valor40.pack()
+            if "AS" in msg:
+                imname = "cartas/AS.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor41=tkinter.Label(top, image=im2, bd=10)
+                valor41.pack()
+            if "JC" in msg:
+                imname = "cartas/JC.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor42=tkinter.Label(top, image=im2, bd=10)
+                valor42.pack()
+            if "JD" in msg:
+                imname = "cartas/JD.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor43=tkinter.Label(top, image=im2, bd=10)
+                valor43.pack()
+            if "JH" in msg:
+                imname = "cartas/JH.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor43=tkinter.Label(top, image=im2, bd=10)
+                valor43.pack()
+            if "JS" in msg:
+                imname = "cartas/JS.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor44=tkinter.Label(top, image=im2, bd=10)
+                valor44.pack()
+            if "KC" in msg:
+                imname = "cartas/KC.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor45=tkinter.Label(top, image=im2, bd=10)
+                valor45.pack()
+            if "KD" in msg:
+                imname = "cartas/KD.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor46=tkinter.Label(top, image=im2, bd=10)
+                valor46.pack()
+            if "KH" in msg:
+                imname = "cartas/KH.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor47=tkinter.Label(top, image=im2, bd=10)
+                valor47.pack()
+            if "KS" in msg:
+                imname = "cartas/KS.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor48=tkinter.Label(top, image=im2, bd=10)
+                valor48.pack()
+            if "QC" in msg:
+                imname = "cartas/QC.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor49=tkinter.Label(top, image=im2, bd=10)
+                valor49.pack()
+            if "QD" in msg:
+                imname = "cartas/QD.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor50=tkinter.Label(top, image=im2, bd=10)
+                valor50.pack()
+            if "QH" in msg:
+                imname = "cartas/QH.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor51=tkinter.Label(top, image=im2, bd=10)
+                valor51.pack()
+            if "QS" in msg:
+                imname = "cartas/QS.png"
+                im1 = Image.open(imname).convert("1")
+                size = (im1.width // 8, im1.height // 8)
+                im1 = ImageTk.BitmapImage(im1.resize(size))
+                im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
+                valor52=tkinter.Label(top, image=im2, bd=10)
+                valor52.pack()
         except OSError:  
             break
 def send(event=None):  
