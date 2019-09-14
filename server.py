@@ -20,23 +20,23 @@ print("REVOLVIENDO CARTAS...",cartas)
 def accept_incoming_connections():
     while True:
         client, client_address = SERVER.accept()
-        print("%s:%s Se a conectado." % client_address)
-        client.send(bytes("Bienvenido al juego! Ingrese su nombre de usuario", "utf8"))
+        print("%s:%s Se ha conectado exitosamente." % client_address)
+        client.send(bytes("¡Bienvenido al juego! Por favor, ingrese su nombre de usuario", "utf8"))
         addresses[client] = client_address
         Thread(target=handle_client, args=(client,)).start()
         
 
 def handle_client(client):  
     global contador
-    print("numero de clientes",contador) 
+    print("Numero de clientes ",contador) 
     name = client.recv(BUFSIZ).decode("utf8")
-    print("usuario conectado", name)
-    welcome = 'Bienvenido %s! Si desea salir escriba {quit} si desea comenzar el juego escrita {start}' % name
+    print("Se ha conectado el usuario: ", name)
+    welcome = "¡Bienvenid@ %s! Si desea salir escriba {quit} si desea comenzar el juego escrita {start}" % name
     client.send(bytes(welcome, "utf8"))
     if (contador <= contador):
         contador = contador + 1
         print(contador)
-    msg = "%s Se a unido al juego!" % name
+    msg = "¡%s Se ha unido al juego!" % name
     broadcast(bytes(msg, "utf8"))
     clients[client] = name
     while True:
@@ -66,7 +66,7 @@ def handle_client(client):
             client.send(bytes("{quit}", "utf8"))
             client.close()
             del clients[client]
-            broadcast(bytes("%s a salido del juego." % name, "utf8"))
+            broadcast(bytes("%s se ha retirado del juego" % name, "utf8"))
             break
 
 def broadcast(msg, prefix=""):  
