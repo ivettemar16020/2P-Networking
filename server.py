@@ -115,10 +115,20 @@ def handle_game(client, username, room):
         print(contador)
         jugador1 = cartas[0:4]
         jugador1 = (' '.join(jugador1))
+        jugador1 = "cards :" + jugador1
+        print(jugador1)
         jugador2 = cartas[4:8]
         jugador2 = (' '.join(jugador2))
+        jugador2 = "cards :" + jugador2
+        print(jugador2)
         jugador3 = cartas[8:12]
         jugador3 = (' '.join(jugador3))
+        jugador3 = "cards :" + jugador3
+        print(jugador3)
+        jugador4 = cartas[12:16] 
+        jugador4 = (' '.join(jugador4))
+        jugador4 = "cards :" + jugador4
+        print(jugador4)
         if contador == 1:
             client.send(bytes(jugador1,"utf8" ))
             print("jugador1", jugador1)
@@ -130,6 +140,12 @@ def handle_game(client, username, room):
             print("jugador3", jugador3)
             client.send(bytes(jugador3,"utf8" ))
             #me da pereza hacer mas 
+        if contador == 4:
+            print("jugador4", jugador4)
+            client.send(bytes(jugador4, "utf8"))
+            print("listo para jugar")
+        if contador == 5:
+            print("SALA LLENA ESCOGE OTRA SALA")
         msg = client.recv(BUFSIZ)
         print("mensaje recibidio",msg, "de:", username)
         if msg != bytes("quit", "utf8"):
