@@ -44,14 +44,14 @@ def send(event=None):
     msg = my_msg.get()
     my_msg.set("")  
     client_socket.send(bytes(msg, "utf8"))
-    if msg == "{quit}":
+    if msg == "quit":
         client_socket.close()
         top.quit()
 
 def on_closing(event=None):
-    my_msg.set("{quit}")
+    my_msg.set("quit")
     send()
-    
+
 top = tkinter.Tk()
 top.title("Cuchara Online")
 messages_frame = tkinter.Frame(top)

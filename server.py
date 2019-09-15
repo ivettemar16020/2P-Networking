@@ -5,7 +5,7 @@ import utils
 import random
 import time
 
-global cartas, contador, rooms
+global cartas, contador, hall, users, room
 
 cartas = [
     "2C", "2D", "2H", "2S", 
@@ -23,8 +23,10 @@ cartas = [
     "QC", "QD", "QH", "QS"]
 
 contador = 0
-#rooms = ["Sala de prueba"]
-rooms = []
+hall = ["Sala de prueba", "sala", "salita"]
+#hall = []
+users = ["ive"]
+room = []
 print(' '.join(cartas))
 random.shuffle(cartas)
 print("REVOLVIENDO CARTAS...",cartas)
@@ -35,45 +37,80 @@ def accept_incoming_connections():
         print("%s:%s Se ha conectado exitosamente." % client_address)
         client.send(bytes("¡Bienvenido al juego! Por favor, ingrese su nombre de usuario", "utf8"))
         addresses[client] = client_address
-        Thread(target=handle_hall, args=(client,)).start()
+        Thread(target=handle_client, args=(client,)).start()
+    
+def handle_client(client): 
+    username = client.recv(BUFSIZ).decode("utf8")
+    while(username in users): 
+        client.send(bytes("El nombre de usuario ya está en uso, por favor utiliza uno diferente", "utf8"))
+        username = client.recv(BUFSIZ).decode("utf8")
+    Thread(target=handle_hall, args=(client,username)).start()
 
-def handle_hall(client): 
-    name = client.recv(BUFSIZ).decode("utf8")
-    while( len(rooms) == 0): 
+def handle_hall(client, username): 
+    client.send(bytes("Para empezar a jugar debes unirte a una sala", "utf8"))
+    while(len(hall) == 0): 
         hall_msg = "Oops! No hay salas disponibles, puedes crear la tuya utilizando <crear> nombre_sala"
         client.send(bytes(hall_msg, "utf8"))
         nueva = client.recv(BUFSIZ).decode("utf8")
         if (nueva.split()[0] == "crear"): 
-            rooms.append(nueva.split()[1])
+            if(nueva.split()[0] not in hall): 
+                hall.append(nueva.split()[1])
+            else: 
+                client.send(bytes("La sala que estás intentando crear ya existe", "utf8"))
+                client.send(bytes("Si deseas unirte a la sala utiliza el comando <unirse> nombre_sala", "utf8"))
 
-    msg = "Las salas disponibles para %s son...\n" %name
-    for room in rooms:
-        msg += room
-    client.send(bytes(msg, "utf8"))
-    msg2 = "Por favor escribe el nombre de la sala a la que deseas unirte"
+    client.send(bytes("Las salas disponibles  son \r\n", "utf8")) 
+    for room in hall:
+        roomy = "- " + room
+        client.send(bytes(roomy, "utf8"))
+    Thread(target=handle_room, args=(client,username)).start()
+
+def handle_room(client, username): 
+    msg2 = "Únete a una sala utilizando <unirse> nombre_sala"
     client.send(bytes(msg2, "utf8"))
-    chsn_room = client.recv(BUFSIZ).decode("utf8")
+    room = []
+    flag = True
+    while(flag == True):
+        join = client.recv(BUFSIZ).decode("utf8")
+        if (join.split()[0] == "unirse"): 
+            if not room: 
+                chsn_room = join.split()[1]
+                #room[0] = chsn_room
+                flag = False
+            else: 
+                """s
+                client.send(bytes("Ya estas unido a una sala, seguro que quieres cambiar? si/no", "utf8"))
+                
+                op = client.recv(BUFSIZ).decode("utf8")
+                if (op == "si"): 
+                    chsn_room = join.split()[1]
+                    room[0] = chsn_room
+                else: 
+                    chsn_room = room[0]
+                """
+                flag = False
+        else: 
+            client.send(bytes("Comando no valido", "utf8"))
+            
+
     print("lo que eligio fue ", chsn_room)
-    Thread(target=handle_client, args=(client,name, chsn_room)).start()
+    Thread(target=handle_game, args=(client,username, chsn_room)).start()
 
-def handle_room(): 
-    pass
-
-def handle_client(client, name, room):  
+def handle_game(client, username, room):  
     global contador
     print("Sala", room)
     print("Numero de clientes ",contador) 
-    print("Se ha conectado el usuario: ", name)
+    print("Se ha conectado el usuario: ", username)
     sala_msg = "Bienvenid@ a la sala %s" % room
     client.send(bytes(sala_msg, "utf8"))
-    welcome = "¡Hola %s! Si desea salir escriba {quit} si desea comenzar el juego escrita {start}" % name
+    welcome = "¡Hola %s! Si desea salir escriba {quit} si desea comenzar el juego escrita {start}" % username
     client.send(bytes(welcome, "utf8"))
     if (contador <= contador):
         contador = contador + 1
         print(contador)
-    msg = "¡%s Se ha unido al juego!" % name
+    msg = "¡%s Se ha unido al juego!" % username
     broadcast(bytes(msg, "utf8"))
-    clients[client] = name
+    clients[client] = username
     while True:
         print(contador)
         jugador1 = cartas[0:4]
@@ -94,19 +131,20 @@ def handle_client(client, name, room):
             client.send(bytes(jugador3,"utf8" ))
             #me da pereza hacer mas 
         msg = client.recv(BUFSIZ)
-        print("mensaje recibidio",msg, "de:", name)
+        print("mensaje recibidio",msg, "de:", username)
         if msg != bytes("quit", "utf8"):
-            broadcast(msg, name+": ")
+            broadcast(msg, username+": ")
         else:
             client.send(bytes("{quit}", "utf8"))
             client.close()
             del clients[client]
-            broadcast(bytes("%s se ha retirado del juego" % name, "utf8"))
+            broadcast(bytes("%s se ha retirado del juego" % username, "utf8"))
             break
-
+    
 def broadcast(msg, prefix=""):  
     for sock in clients:
         sock.send(bytes(prefix, "utf8")+msg)
+
 clients = {}
 addresses = {}
 #HOST = '192.168.1.17' con el ifconfig de mi computadora
