@@ -31,22 +31,28 @@ def receive():
     while True:
         try:
             msg = client_socket.recv(BUFSIZ).decode("utf8")
-            msg_list.insert(tkinter.END, msg)
             print(msg)
-            for i in range(len(CARDS)): 
-                if CARDS[i] in msg: 
-                    path = "cartas/" + CARDS[i] + ".png"
-                    cart(path)
-        except OSError:  
+            if "cards" in msg:
+                cards_list.insert(tkinter.END, msg)
+                for i in range(len(CARDS)):
+                    if CARDS[i] in msg:
+                        path = "cartas/" + CARDS[i] + ".png"
+                        cart(path)
+            if "cards" not in msg:
+                msg_list.insert(tkinter.END, msg)
+        except OSError:
             break
+            
+
         
 def send(event=None):  
     msg = my_msg.get()
-    my_msg.set("")  
-    client_socket.send(bytes(msg, "utf8"))
-    if msg == "quit":
-        client_socket.close()
-        top.quit()
+    if "cards" not in msg:
+        my_msg.set("")  
+        client_socket.send(bytes(msg, "utf8"))
+        if msg == "quit":
+            client_socket.close()
+            top.quit()
 
 def on_closing(event=None):
     my_msg.set("quit")
@@ -58,10 +64,13 @@ messages_frame = tkinter.Frame(top)
 my_msg = tkinter.StringVar()  
 my_msg.set("")
 scrollbar = tkinter.Scrollbar(messages_frame) 
-msg_list = tkinter.Listbox(messages_frame, height=15, width=100, yscrollcommand=scrollbar.set)
+msg_list = tkinter.Listbox(messages_frame, height=8, width=100, yscrollcommand=scrollbar.set)
+cards_list = tkinter.Listbox(messages_frame, height=8, width=50, yscrollcommand=scrollbar.set)
 scrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
 msg_list.pack(side=tkinter.LEFT, fill=tkinter.BOTH)
 msg_list.pack()
+cards_list.pack(side=tkinter.RIGHT, fill=tkinter.BOTH)
+cards_list.pack()
 messages_frame.pack()
 entry_field = tkinter.Entry(top, textvariable=my_msg)
 entry_field.bind("<Return>", send)
