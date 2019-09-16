@@ -253,6 +253,8 @@ def receive():
                     im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
                     valor52=tkinter.Label(top, image=im2, bd=10)
                     valor52.pack()
+                todascartas = (' '.join(miscartas))
+                print("TODAS LAS CARTAS", todascartas)
                 cartasactuales = (' '.join(miscartas[0]))
                 cartasactuales1 = (' '.join(miscartas[1]))
                 cartasactuales2 = (' '.join(miscartas[2]))
