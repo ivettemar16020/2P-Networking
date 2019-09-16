@@ -29,7 +29,9 @@ def cart(path):
     im1 = ImageTk.BitmapImage(im1.resize(size))
     im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
     val_cart = tkinter.Label(top, image=im2, bd=10)
-    val_cart.pack(side = tkinter.LEFT, expand=tkinter.YES)
+    #val_cart.pack(side = tkinter.LEFT, expand=tkinter.YES)
+    val_cart.image = im2
+    return val_cart
 
 def receive():
     while True:
@@ -43,15 +45,15 @@ def receive():
                 
             if "cards" in msg:
                 cards_list.insert(tkinter.END, msg)
+                cartitas = []
                 for i in range(len(CARDS)): 
                     if CARDS[i] in msg:
                         path = "cartas/" + CARDS[i] + ".png"
-                        cart(path)
+                        cartitas.append(cart(path))
+                        for j in range(len(cartitas)): 
+                            cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES)
                         miscartas.append(CARDS[i])
-                        if (CARDS[i] == "QS"): 
-                            path = "cartas/" + CARDS[i] + ".png"
-                            cart(path)
-                            print(*miscartas, sep = ", ")
+                        print(*miscartas, sep = ", ")
                     
                 todascartas = (' '.join(miscartas))
                 print("TODAS LAS CARTAS", todascartas)
