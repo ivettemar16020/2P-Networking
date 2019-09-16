@@ -38,6 +38,8 @@ def receive():
         try:
             msg = client_socket.recv(BUFSIZ).decode("utf8")
             print(msg)
+            if "turno1" in msg:
+                print("RECIBIO UNA CARTA",msg)
             if "user:" in msg:
                 file1 = open("user.txt","w")#write mode 
                 file1.write(msg) 

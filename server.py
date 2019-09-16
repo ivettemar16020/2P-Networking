@@ -181,10 +181,13 @@ def handle_game(client, username, room):
             messagedecode = msg.decode("utf-8")
             messagedecode = messagedecode.replace('cartapasar:', '') 
             messagedecode = messagedecode.replace(" ", "")
+            messagedecode = "turno1"+ messagedecode
             print("CARTA RECIBIDA", messagedecode, username)
             finduser = users.index(username)
             print("INDICE DEL USER", finduser)
-            client.sendto(bytes(messagedecode, "utf8"), client_dir[finduser+1])
+            finduser = finduser + 1
+            print("INDICE DEL USER", finduser)
+            client.sendto(bytes(messagedecode, "utf8"), client_dir[finduser])
             #msg.replace('carta pasada b'cartapasar:', '')
             #client.sendto(bytes(msg, "utf8"))
         print("mensaje recibidio",msg, "de:", username)
