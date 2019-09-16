@@ -1,1 +1,1 @@
-user:pascalito cards :9C JC 10D AC
+user:dog  cards :KH 9D 4C 2D
