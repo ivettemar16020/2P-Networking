@@ -1,1 +1,1 @@
-user:dog  cards :KH 9D 4C 2D
+user:pasquiboy cards :4S AC 10S QC

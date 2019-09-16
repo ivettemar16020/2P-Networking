@@ -263,7 +263,11 @@ def receive():
                 popupMenu = OptionMenu(top, tkvar, *choices)
                 popupMenu.pack()
                 def ok():
-                    print ("obtener el valor", tkvar.get())
+                    #print ("Carta", tkvar.get())
+                    cartaapasar = tkvar.get()
+                    cartaapasar = "cartapasar:" + cartaapasar
+                    print(cartaapasar)
+                    client_socket.send(bytes(cartaapasar, "utf8"))
                 button2 = tkinter.Button(top, text="Pasar Carta", command=ok)
                 button2.pack()
                     
