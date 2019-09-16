@@ -113,6 +113,10 @@ def handle_game(client, username, room):
     global cartas1
     global cartas2
     global cartas3
+    jugador1 = False
+    jugador2 = False
+    jugador3 = False
+    jugador4 = False
     usuario = "user:" + users[0]
     client.send(bytes(usuario, "utf8"))
     print("Sala", room)
@@ -131,49 +135,63 @@ def handle_game(client, username, room):
     while True:
         print(contador)
         n = 4
-        if contador == 1:
-            print(users)
-            print(client_dir)
-            jugador1 = cartas[0:4]
-            jugador1 = (' '.join(jugador1))
-            jugador1 = "cards :" + jugador1
-            message1 = users[0] + " " + jugador1
-            client.sendto(bytes(message1, "utf8"), client_dir[0])
-            client.sendto(bytes("\nPrueba solo para P1", "utf8"), client_dir[0])
-            cartas1 = cartas[n:]
-            print(cartas1)
-            print("jugador1", jugador1)
-            print("necesitas mas jugadores")
-        if contador == 2:
-            print(client_dir)
-            jugador2 = cartas[4:8]
-            jugador2 = (' '.join(jugador2))
-            jugador2 = "cards :" + jugador2
-            print("jugador2", jugador2)
-            message2 = users[1] + " " + jugador2
-            client.sendto(bytes(message2, "utf8"), client_dir[1])
-            client.sendto(bytes("\nPrueba solo para P2", "utf8"), client_dir[1])
-            cartas2 = cartas1[n:]
-            print(cartas2)
-        if contador == 3:
-            jugador3 = cartas[8:12]
-            jugador3 = (' '.join(jugador3))
-            jugador3 = "cards :" + jugador3
-            print("jugador3", jugador3)
-            message3 = users[2] + " " + jugador3
-            client.sendto(bytes(message3, "utf8"), client_dir[2])
-            cartas3 = cartas2[n:]
-            print(cartas3)
-        if contador == 4:
-            jugador4 = cartas[12:16]
-            jugador4 = (' '.join(jugador4))
-            jugador4 = "cards :" + jugador4
-            print("jugador4", jugador4)
-            message4 = users[3] + " " + jugador4
-            client.sendto(bytes(message4, "utf8"), client_dir[3])
-            cartas4 = cartas3[n:]
-            print(cartas4)
-            print("listo para jugar")
+        if contador == 1 and jugador1 == False:
+            if jugador4 == False:
+                print(users)
+                print(client_dir)
+                jugador1 = cartas[0:4]
+                jugador1 = (' '.join(jugador1))
+                jugador1 = "cards :" + jugador1
+                message1 = users[0] + " " + jugador1
+                client.sendto(bytes(message1, "utf8"), client_dir[0])
+                client.sendto(bytes("\nPrueba solo para P1", "utf8"), client_dir[0])
+                cartas1 = cartas[n:]
+                print(cartas1)
+                print("jugador1", jugador1)
+                print("necesitas mas jugadores")
+                jugador1 = True
+                jugador4 = False
+        if contador == 2 and jugador2 == False:
+            if jugador1 == False:
+                print(client_dir)
+                jugador2 = cartas[4:8]
+                jugador2 = (' '.join(jugador2))
+                jugador2 = "cards :" + jugador2
+                print("jugador2", jugador2)
+                message2 = users[1] + " " + jugador2
+                client.sendto(bytes(message2, "utf8"), client_dir[1])
+                client.sendto(bytes("\nPrueba solo para P2", "utf8"), client_dir[1])
+                cartas2 = cartas1[n:]
+                print(cartas2)
+                jugador2 = True
+                jugador1 = False
+        if contador == 3 and jugador3 == False:
+            if jugador2 == False and jugador1 == False:
+                jugador3 = cartas[8:12]
+                jugador3 = (' '.join(jugador3))
+                jugador3 = "cards :" + jugador3
+                print("jugador3", jugador3)
+                message3 = users[2] + " " + jugador3
+                client.sendto(bytes(message3, "utf8"), client_dir[2])
+                cartas3 = cartas2[n:]
+                print(cartas3)
+                jugador3 = True
+                jugador2 = False
+                jugador1 = False
+        if contador == 4 and jugador4 == False:
+            if jugador3 == False and jugador2 == False:
+                jugador4 = cartas[12:16]
+                jugador4 = (' '.join(jugador4))
+                jugador4 = "cards :" + jugador4
+                print("jugador4", jugador4)
+                message4 = users[3] + " " + jugador4
+                client.sendto(bytes(message4, "utf8"), client_dir[3])
+                cartas4 = cartas3[n:]
+                print(cartas4)
+                print("listo para jugar")
+                jugador4 = True
+                jugador3 = False
+                jugador2 = False
         if contador == 5:
             print("SALA LLENA ESCOGE OTRA SALA")
         msg = client.recv(BUFSIZ)
