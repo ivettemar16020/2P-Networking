@@ -32,6 +32,11 @@ def receive():
         try:
             msg = client_socket.recv(BUFSIZ).decode("utf8")
             print(msg)
+            if "user:" in msg:
+                file1 = open("user.txt","w")#write mode 
+                file1.write(msg) 
+                file1.close() 
+                
             if "cards" in msg:
                 cards_list.insert(tkinter.END, msg)
                 for i in range(len(CARDS)):
@@ -43,7 +48,11 @@ def receive():
         except OSError:
             break
             
-
+def get_user():
+    #inicio de funcion para obtener usuario
+    file1 = open("userget.txt","w")#write mode 
+    file1.write(msg) 
+    file1.close() 
         
 def send(event=None):  
     msg = my_msg.get()
@@ -65,7 +74,7 @@ my_msg = tkinter.StringVar()
 my_msg.set("")
 scrollbar = tkinter.Scrollbar(messages_frame) 
 msg_list = tkinter.Listbox(messages_frame, height=8, width=100, yscrollcommand=scrollbar.set)
-cards_list = tkinter.Listbox(messages_frame, height=8, width=50, yscrollcommand=scrollbar.set)
+cards_list = tkinter.Listbox(messages_frame, height=8, width=100, yscrollcommand=scrollbar.set)
 scrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
 msg_list.pack(side=tkinter.LEFT, fill=tkinter.BOTH)
 msg_list.pack()
