@@ -29,7 +29,7 @@ def cart(path):
     im1 = ImageTk.BitmapImage(im1.resize(size))
     im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
     val_cart = tkinter.Label(top, image=im2, bd=10)
-    val_cart.pack()
+    val_cart.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
 def receive():
     while True:
@@ -43,216 +43,16 @@ def receive():
                 
             if "cards" in msg:
                 cards_list.insert(tkinter.END, msg)
-                if "2C" in msg:
-                    miscartas.append('2C')
-                   
-
-                if "2D" in msg:
-                    miscartas.append('2D')
-                   
-                if "2H" in msg:
-                    miscartas.append('2H')
-                
-
-                if "2S" in msg:
-                    miscartas.append('2S')
-                 
-
-                if "3C" in msg:
-                    miscartas.append('3C')
-                
-
-                if "3D" in msg:
-                    miscartas.append('3D')
+                for i in range(len(CARDS)): 
+                    if CARDS[i] in msg:
+                        path = "cartas/" + CARDS[i] + ".png"
+                        cart(path)
+                        miscartas.append(CARDS[i])
+                        if (CARDS[i] == "QS"): 
+                            path = "cartas/" + CARDS[i] + ".png"
+                            cart(path)
+                            print(*miscartas, sep = ", ")
                     
-
-                if "3H" in msg:
-                    miscartas.append('3H')
-                 
-
-                if "3S" in msg:
-                    miscartas.append('3S')
-            
-
-                if "4C" in msg:
-                    miscartas.append('4C')
-                  
-
-                if "4D" in msg:
-                    miscartas.append('4D')
-                 
-
-                if "4H" in msg:
-                    miscartas.append('4H')
-                   
-
-                if "4S" in msg:
-                    miscartas.append('4S')
-                    
-
-                if "5C" in msg:
-                    miscartas.append('5C')
-                   
-                if "5D" in msg:
-                    miscartas.append('5D')
-                   
-
-                if "5H" in msg:
-                    miscartas.append('5H')
-                   
-
-                if "5S" in msg:
-                    miscartas.append('5S')
-                    
-                if "6C" in msg:
-                    miscartas.append('6C')
-                    
-
-                if "6D" in msg:
-                    miscartas.append('6D')
-                   
-
-                if "6H" in msg:
-                    miscartas.append('6H')
-                    
-
-                if "6S" in msg:
-                    miscartas.append('6S')
-                   
-
-                if "7C" in msg:
-                    miscartas.append('7C')
-                  
-
-                if "7D" in msg:
-                    miscartas.append('7D')
-                   
-
-                if "7H" in msg:
-                    miscartas.append('7H')
-                    
-
-                if "7S" in msg:
-                    miscartas.append('7S')
-                    
-
-                if "8C" in msg:
-                    miscartas.append('8C')
-                  
-
-                if "8D" in msg:
-                    miscartas.append('8D')
-                    
-
-                if "8H" in msg:
-                    miscartas.append('8H')
-                    
-
-                if "8S" in msg:
-                    miscartas.append('8S')
-                   
-                if "9C" in msg:
-                    miscartas.append('9C')
-                   
-
-                if "9D" in msg:
-                    miscartas.append('9D')
-                    
-
-                if "9H" in msg:
-                    miscartas.append('9H')
-                   
-
-                if "9S" in msg:
-                    miscartas.append('9S')
-                    
-
-                if "10C" in msg:
-                    miscartas.append('10C')
-                    
-
-                if "10D" in msg:
-                    miscartas.append('10D')
-                   
-
-                if "10H" in msg:
-                    miscartas.append('10H')
-                    
-
-                if "10S" in msg:
-                    miscartas.append('10S')
-                   
-
-                if "AC" in msg:
-                    miscartas.append('AC')
-                    
-
-                if "AD" in msg:
-                    miscartas.append('AC')
-                    
-
-                if "AH" in msg:
-                    miscartas.append('AH')
-                    
-
-                if "AS" in msg:
-                    miscartas.append('AS')
-                  
-
-                if "JC" in msg:
-                    miscartas.append('JC')
-                    
-
-                if "JD" in msg:
-                    miscartas.append('JD')
-                    
-
-                if "JH" in msg:
-                    miscartas.append('JH')
-                    
-
-                if "JS" in msg:
-                    miscartas.append('JS')
-                    
-
-                if "KC" in msg:
-                    miscartas.append('KC')
-                 
-
-                if "KD" in msg:
-                    miscartas.append('KD')
-                    
-
-                if "KH" in msg:
-                    miscartas.append('KH')
-                    
-
-                if "KS" in msg:
-                    miscartas.append('KS')
-                    
-
-                if "QC" in msg:
-                    miscartas.append('QS')
-                    
-
-                if "QD" in msg:
-                    miscartas.append('QD')
-                    
-
-                if "QH" in msg:
-                    miscartas.append('QH')
-                    
-
-                if "QS" in msg:
-                    miscartas.append('QS')
-                    print(*miscartas, sep = ", ")
-                    imname = "cartas/QS.png"
-                    im1 = Image.open(imname).convert("1")
-                    size = (im1.width // 8, im1.height // 8)
-                    im1 = ImageTk.BitmapImage(im1.resize(size))
-                    im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
-                    valor52=tkinter.Label(top, image=im2, bd=10)
-                    valor52.pack()
                 todascartas = (' '.join(miscartas))
                 print("TODAS LAS CARTAS", todascartas)
                 cartasactuales = (' '.join(miscartas[0]))
@@ -263,7 +63,7 @@ def receive():
                 tkvar = tkinter.StringVar()
                 tkvar.set(cartasactuales) # set the default option
                 popupMenu = OptionMenu(top, tkvar, *choices)
-                popupMenu.pack()
+                popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
                 def ok():
                     #print ("Carta", tkvar.get())
                     cartasobtenidas = (' '.join(miscartas))
@@ -273,12 +73,8 @@ def receive():
                     print(cartaapasar)
                     client_socket.send(bytes(cartaapasar, "utf8"))
                 button2 = tkinter.Button(top, text="Pasar Carta", command=ok)
-                button2.pack()
-                    
-                #for i in range(len(CARDS)):
-                #    if CARDS[i] in msg:
-                #        path = "cartas/" + CARDS[i] + ".png"
-                #        cart(path)
+                button2.pack(side = tkinter.LEFT, expand=tkinter.YES)
+
             if "cards" not in msg:
                 msg_list.insert(tkinter.END, msg)
         except OSError:
