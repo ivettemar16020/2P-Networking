@@ -264,6 +264,8 @@ def receive():
                 popupMenu.pack()
                 def ok():
                     #print ("Carta", tkvar.get())
+                    cartasobtenidas = (' '.join(miscartas))
+                    print(cartasobtenidas)
                     cartaapasar = tkvar.get()
                     cartaapasar = "cartapasar:" + cartaapasar
                     print(cartaapasar)

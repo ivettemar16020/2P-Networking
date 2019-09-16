@@ -178,7 +178,12 @@ def handle_game(client, username, room):
             print("SALA LLENA ESCOGE OTRA SALA")
         msg = client.recv(BUFSIZ)
         if bytes("cartapasar:", "utf8") in msg:
-            print("carta pasada",msg)
+            print("CARTA PASADA",msg)
+            messagedecode = msg.decode("utf-8")
+            print("CARTA DECODEADA", messagedecode)
+            messagedecode = messagedecode.replace('cartapasar:', '') 
+            print("CARTA CORTADA", messagedecode)
+            #msg.replace('carta pasada b'cartapasar:', '')
             #client.sendto(bytes(msg, "utf8"))
         print("mensaje recibidio",msg, "de:", username)
         if msg != bytes("quit", "utf8"):
