@@ -179,7 +179,7 @@ def handle_game(client, username, room):
                 jugador2 = False
                 jugador1 = False
         if contador == 4 and jugador4 == False:
-            if jugador3 == False and jugador2 == False:
+            if jugador3 == False and jugador2 == False and jugador1 == False:
                 jugador4 = cartas[12:16]
                 jugador4 = (' '.join(jugador4))
                 jugador4 = "cards :" + jugador4
@@ -192,6 +192,7 @@ def handle_game(client, username, room):
                 jugador4 = True
                 jugador3 = False
                 jugador2 = False
+                jugador1 = False
         if contador == 5:
             print("SALA LLENA ESCOGE OTRA SALA")
         msg = client.recv(BUFSIZ)
@@ -209,6 +210,28 @@ def handle_game(client, username, room):
             elif(finduser == 0 and contador == 2):
                 destiny = finduser - 1
                 client.sendto(bytes(messagedecode, "utf8"), client_dir[destiny])
+            elif(finduser == 0 and contador == 3):
+                destiny = finduser + 1
+                client.sendto(bytes(messagedecode, "utf8"), client_dir[destiny])
+            elif(finduser == 1 and contador == 3):
+                destiny = finduser + 1
+                client.sendto(bytes(messagedecode, "utf8"), client_dir[destiny])
+            elif(finduser == 2 and contador == 3):
+                destiny = finduser - 1
+                client.sendto(bytes(messagedecode, "utf8"), client_dir[destiny])
+            elif(finduser == 0 and contador == 4):
+                destiny = finduser + 1
+                client.sendto(bytes(messagedecode, "utf8"), client_dir[destiny])
+            elif(finduser == 1 and contador == 4):
+                destiny = finduser + 1
+                client.sendto(bytes(messagedecode, "utf8"), client_dir[destiny])
+            elif(finduser == 2 and contador == 4):
+                destiny = finduser + 1
+                client.sendto(bytes(messagedecode, "utf8"), client_dir[destiny])
+            elif(finduser == 3 and contador == 4):
+                destiny = finduser - 1
+                client.sendto(bytes(messagedecode, "utf8"), client_dir[destiny])
+            
             #client.sendto(bytes(messagedecode, "utf8"), client_dir[finduser])
             #client.sendto(bytes(messagedecode, "utf8"), client_dir[finduser-1])
             #msg.replace('carta pasada b'cartapasar:', '')

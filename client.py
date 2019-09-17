@@ -57,12 +57,12 @@ def receive():
                         miscartas.append(CARDS[i])
                         print(*miscartas, sep = ", ")
                     
-                todascartas = (' '.join(miscartas))
+                todascartas = (''.join(miscartas))
                 print("TODAS LAS CARTAS", todascartas)
-                cartasactuales = (' '.join(miscartas[0]))
-                cartasactuales1 = (' '.join(miscartas[1]))
-                cartasactuales2 = (' '.join(miscartas[2]))
-                cartasactuales3 = (' '.join(miscartas[3]))
+                cartasactuales = (''.join(miscartas[0]))
+                cartasactuales1 = (''.join(miscartas[1]))
+                cartasactuales2 = (''.join(miscartas[2]))
+                cartasactuales3 = (''.join(miscartas[3]))
                 choices = {cartasactuales, cartasactuales1, cartasactuales2, cartasactuales3}
                 tkvar = tkinter.StringVar()
                 tkvar.set(cartasactuales) # set the default option
