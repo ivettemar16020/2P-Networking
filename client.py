@@ -79,6 +79,12 @@ def receive():
                 button2 = tkinter.Button(top, text="Pasar Carta", command=ok)
                 button2.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
+                def not_ok():
+                    client_socket.send(bytes("recibiendo", "utf8"))
+
+                button3 = tkinter.Button(top, text="Recibir Carta", command=not_ok)
+                button3.pack(side = tkinter.LEFT, expand=tkinter.YES)
+
             if "cards" not in msg:
                 msg_list.insert(tkinter.END, msg)
         except OSError:
