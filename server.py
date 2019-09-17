@@ -197,6 +197,8 @@ def handle_game(client, username, room):
             print("SALA LLENA ESCOGE OTRA SALA")
         msg = client.recv(BUFSIZ)
         if bytes("cartapasar:", "utf8") in msg:
+            print("RECIBIDO EL CODIGO cartapasar TEST!")
+            send_to()
             messagedecode = msg.decode("utf-8")
             messagedecode = messagedecode.replace('cartapasar:', '') 
             messagedecode = messagedecode.replace(" ", "")
@@ -211,7 +213,7 @@ def handle_game(client, username, room):
             finduser = finduser + 1
             print("DEBUGEANDO4a", client_dir[finduser])
             #buscar porque solo se envia a si mismo
-            client.sendto(bytes(messagedecode, "utf8"), client_dir[1])
+            client.sendto(bytes(messagedecode, "utf8"), client_dir[finduser])
             #client.sendto(bytes(messagedecode, "utf8"), client_dir[finduser-1])
             #msg.replace('carta pasada b'cartapasar:', '')
             #client.sendto(bytes(msg, "utf8"))
@@ -228,6 +230,13 @@ def handle_game(client, username, room):
 def broadcast(msg, prefix=""):  
     for sock in clients:
         sock.send(bytes(prefix, "utf8")+msg)
+
+def send_to():
+    global client_dir
+    for sock in clients:
+        print(client_dir[0])
+        print(client_dir[1])
+        sock.sendto(bytes("Mensaje para USUARIO No.1 SOLAMENTE!", "utf8"), client_dir[0])
 
 clients = {}
 addresses = {}
