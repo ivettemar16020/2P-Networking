@@ -23,13 +23,18 @@ CARDS = [
 miscartas = []
 cartas_jugador = []
 
+def delete_children(cart_frame):
+    for child in cart_frame.winfo_children():
+        child.destroy()
+
 def cart(path):
+    cart_frame.pack(side=tkinter.LEFT, anchor=tkinter.CENTER)
     imname = path
     im1 = Image.open(imname).convert("1")
     size = (im1.width // 8, im1.height // 8)
     im1 = ImageTk.BitmapImage(im1.resize(size))
     im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
-    val_cart = tkinter.Label(top, image=im2, bd=10)
+    val_cart = tkinter.Label(cart_frame, image=im2, bd=10)
     #val_cart.pack(side = tkinter.LEFT, expand=tkinter.YES)
     val_cart.image = im2
     return val_cart
@@ -96,7 +101,8 @@ def receive():
                 def not_ok():
                     client_socket.send(bytes("recibiendo", "utf8"))
 
-                button3 = tkinter.Button(top, text="Recibir Carta", command=not_ok)
+                button3 = tkinter.Button(top, text="Recibir Carta", command=lambda:[not_ok(), delete_children(cart_frame)])
+                #cart_frame.pack(side=tkinter.LEFT, anchor=tkinter.CENTER)
                 button3.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
             if "cards" not in msg:
@@ -147,6 +153,8 @@ entry_field.bind("<Return>", send)
 entry_field.pack()
 send_button = tkinter.Button(top, text="Send", command=send)
 send_button.pack()
+cart_frame = tkinter.Frame(top)
+cart_frame.pack(side=tkinter.LEFT, anchor=tkinter.CENTER)
 
 top.protocol("WM_DELETE_WINDOW", on_closing)
 #HOST = '192.168.1.17' con el ipconfig de mi compu para conectarnos 
