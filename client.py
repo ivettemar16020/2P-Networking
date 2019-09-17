@@ -21,7 +21,7 @@ CARDS = [
     "QC", "QD", "QH", "QS"]
 
 miscartas = []
-
+cartas_jugador = []
 
 def cart(path):
     imname = path
@@ -41,6 +41,18 @@ def receive():
             print(msg)
             if "turno1" in msg:
                 print("RECIBIO UNA CARTA",msg)
+                print("MIS CARTAS SON: ", cartas_jugador)
+                nueva_carta = msg.split("turno1")[1]
+                cartas_jugador.append(nueva_carta)
+                las_cartitas = []
+                for i in range(len(CARDS)):
+                    if CARDS[i] in cartas_jugador:
+                        path = "cartas/" + CARDS[i] + ".png"
+                        las_cartitas.append(cart(path))
+                        for j in range(len(las_cartitas)): 
+                            las_cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES)
+                print("MIS CARTAS NUEVAS SON: ", cartas_jugador)
+
             if "user:" in msg:
                 file1 = open("user.txt","w")#write mode 
                 file1.write(msg) 
@@ -56,6 +68,7 @@ def receive():
                         for j in range(len(cartitas)): 
                             cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES)
                         miscartas.append(CARDS[i])
+                        cartas_jugador.append(CARDS[i])
                         print(*miscartas, sep = ", ")
                     
                 todascartas = (' '.join(miscartas))
