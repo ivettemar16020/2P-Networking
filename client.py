@@ -3,6 +3,7 @@ from threading import Thread
 from PIL import ImageTk, Image
 import tkinter
 from tkinter import OptionMenu
+import os
 
 CARDS = [
     "2C", "2D", "2H", "2S", 
@@ -108,9 +109,14 @@ def send(event=None):
 def on_closing(event=None):
     my_msg.set("quit")
     send()
+def snd1():
+    os.system("a.mp4")
 
 top = tkinter.Tk()
 top.title("Cuchara Online")
+var = tkinter.IntVar()
+rb1 = tkinter.Radiobutton(top, text= "Video de Instrucciones", variable = var, value=1, command=snd1)
+rb1.pack()
 messages_frame = tkinter.Frame(top)
 my_msg = tkinter.StringVar()  
 my_msg.set("")
