@@ -174,6 +174,7 @@ def handle_game(client, username, room):
                 print("jugador3", jugador3)
                 message3 = users[2] + " " + jugador3
                 client.sendto(bytes(message3, "utf8"), client_dir[2])
+                client.sendto(bytes("\nPrueba solo para P3", "utf8"), client_dir[2])
                 cartas3 = cartas2[n:]
                 print(cartas3)
                 jugador3 = True
@@ -187,6 +188,7 @@ def handle_game(client, username, room):
                 print("jugador4", jugador4)
                 message4 = users[3] + " " + jugador4
                 client.sendto(bytes(message4, "utf8"), client_dir[3])
+                client.sendto(bytes("\nPrueba solo para P4", "utf8"), client_dir[3])
                 cartas4 = cartas3[n:]
                 print(cartas4)
                 print("listo para jugar")
