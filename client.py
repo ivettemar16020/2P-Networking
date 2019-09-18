@@ -31,7 +31,7 @@ def popupHalp():
     def leavemini():
         popuphelp.destroy()
 
-    msg = "Instrucciones: Para ganar en Cuchara Online, usted tiene que formar una mano con cuatro cartas iguales. Para esto, debe desechar una carta por cada turno y pasársela al siguiente jugador. Si usted es el último jugador del turno, entonces solo pase la carta, esta irá al desecho. ¡Mucha suerte!"
+    msg = "Instrucciones \nPara ganar en Cuchara Online, usted tiene que formar una mano con cuatro cartas iguales. \nPara esto, debe desechar una carta por cada turno y pasársela al siguiente jugador. \nSi usted es el último jugador del turno, entonces solo pase la carta, esta irá al desecho. \n¡Mucha suerte!\nRecuerde:\n1) Para enviar una carta, presione Pasar Carta\n2) Para recibir una carta, presione Recibir carta\n3) Si desea enviar un mensaje, escribalo y presione Send"
     popuphelp = tkinter.Tk()
     popuphelp.wm_title("Instrucciones")
     label = tkinter.Label(popuphelp, text=msg)
