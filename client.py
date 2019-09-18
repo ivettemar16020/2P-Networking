@@ -47,17 +47,20 @@ def receive():
             msg = client_socket.recv(BUFSIZ).decode("utf8")
             print(msg)
             if  "Prueba solo para P1" in msg:
-                w = tkinter.Label(top, text="Usuario 1")
-                w.pack()
+                w1 = tkinter.Label(top, text="Usuario 1")
+                w1.pack()
             if  "Prueba solo para P2" in msg:
-                w = tkinter.Label(top, text="Usuario 2")
-                w.pack()
+                w2 = tkinter.Label(top, text="Usuario 2")
+                w2.pack()
             if  "Prueba solo para P3" in msg:
-                w = tkinter.Label(top, text="Usuario 3")
-                w.pack()
+                w3 = tkinter.Label(top, text="Usuario 3")
+                w3.pack()
             if  "Prueba solo para P4" in msg:
-                w = tkinter.Label(top, text="Usuario 4")
-                w.pack()
+                w4 = tkinter.Label(top, text="Usuario 4")
+                w4.pack()
+            if "Turno del Usuario" in msg:
+                w5 = tkinter.Label(top, text=msg)
+                w5.pack(side = tkinter.LEFT)
             if "turno1" in msg:
                 print("RECIBIO UNA CARTA",msg)
                 print("MIS CARTAS SON: ", cartas_jugador)
