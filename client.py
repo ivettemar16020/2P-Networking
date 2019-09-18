@@ -3,6 +3,7 @@ from threading import Thread
 from PIL import ImageTk, Image
 import tkinter
 from tkinter import OptionMenu
+import tkinter.messagebox
 import os
 
 CARDS = [
@@ -189,6 +190,9 @@ def ganar(cartas):
     else: 
         print("Tu mano no es valida para ganar")
 
+def show_msg(m1, m2):
+   tkinter.messagebox.showinfo(m1, m2)
+
 top = tkinter.Tk()
 top.title("Cuchara Online")
 var = tkinter.IntVar()
@@ -219,7 +223,13 @@ cart_frame.pack(side=tkinter.LEFT, anchor=tkinter.CENTER)
 bottomframe = tkinter.Frame(top)
 bottomframe.pack( side=tkinter.BOTTOM, anchor=tkinter.SE)
 
-win_button = tkinter.Button(bottomframe, text="Cuchara", state=tkinter.DISABLED)
+imname = "assets/spoon.png"
+origin = Image.open(imname).convert("1")
+size = (origin.width // 3, origin.height // 3)
+origin = ImageTk.BitmapImage(origin.resize(size))
+spoon = ImageTk.PhotoImage(Image.open(imname).resize(size))
+win_button = tkinter.Button(bottomframe, image = spoon, state=tkinter.DISABLED)
+#win_button = tkinter.Button(bottomframe, image = spoon, state=tkinter.DISABLED, command = show_msg("Felicidades", "¡Ganaste el juego!"))
 win_button.pack(side=tkinter.RIGHT)
 
 top.protocol("WM_DELETE_WINDOW", on_closing)
