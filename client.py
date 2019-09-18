@@ -21,6 +21,7 @@ CARDS = [
     "QC", "QD", "QH", "QS"]
 
 miscartas = []
+global cartas_jugador
 cartas_jugador = []
 
 def delete_children(cart_frame):
@@ -39,6 +40,20 @@ def cart(path):
     val_cart.image = im2
     return val_cart
 
+def update_gui(cartas_jugador): 
+    las_cartitas = []
+    for i in range(len(CARDS)):
+        if CARDS[i] in cartas_jugador:
+            path = "cartas/" + CARDS[i] + ".png"
+            las_cartitas.append(cart(path))
+            for j in range(len(las_cartitas)): 
+                las_cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES, ipady=10) 
+
+    tkvar = tkinter.StringVar()
+    tkvar.set(cartas_jugador[0]) # set the default option
+    popupMenu = OptionMenu(cart_frame, tkvar, *cartas_jugador)
+    popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
+
 def receive():
     while True:
         try:
@@ -49,14 +64,7 @@ def receive():
                 print("MIS CARTAS SON: ", cartas_jugador)
                 nueva_carta = msg.split("turno1")[1]
                 cartas_jugador.append(nueva_carta)
-                las_cartitas = []
-                for i in range(len(CARDS)):
-                    if CARDS[i] in cartas_jugador:
-                        path = "cartas/" + CARDS[i] + ".png"
-                        las_cartitas.append(cart(path))
-                        for j in range(len(las_cartitas)): 
-                            las_cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES, ipady=10) 
-                print("MIS CARTAS NUEVAS SON: ", cartas_jugador)
+                update_gui(cartas_jugador)
 
             if "user:" in msg:
                 file1 = open("user.txt","w")#write mode 
@@ -75,28 +83,30 @@ def receive():
                         miscartas.append(CARDS[i])
                         cartas_jugador.append(CARDS[i])
                         print(*miscartas, sep = ", ")
-                    
-                # todascartas = (' '.join(miscartas))
-                # print("TODAS LAS CARTAS", todascartas)
-                # cartasactuales = (' '.join(miscartas[0]))
-                # cartasactuales1 = (' '.join(miscartas[1]))
-                # cartasactuales2 = (' '.join(miscartas[2]))
-                # cartasactuales3 = (' '.join(miscartas[3]))
-                # choices = {cartasactuales, cartasactuales1, cartasactuales2, cartasactuales3}
-                # tkvar = tkinter.StringVar()
-                # tkvar.set(cartasactuales) # set the default option
-                # popupMenu = OptionMenu(top, tkvar, *choices)
-                # popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
+                   
+                todascartas = (' '.join(miscartas))
+                print("TODAS LAS CARTAS", todascartas)
+                cartasactuales = (' '.join(miscartas[0]))
+                cartasactuales1 = (' '.join(miscartas[1]))
+                cartasactuales2 = (' '.join(miscartas[2]))
+                cartasactuales3 = (' '.join(miscartas[3]))
+                choices = {cartasactuales, cartasactuales1, cartasactuales2, cartasactuales3}
+                tkvar = tkinter.StringVar()
+                tkvar.set(cartasactuales) # set the default option
+                popupMenu = OptionMenu(cart_frame, tkvar, *choices)
+                popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
                 def ok():
-                    #print ("Carta", tkvar.get())
                     cartasobtenidas = (' '.join(miscartas))
                     print("Estas son las cartas obtenidas:" + cartasobtenidas)
                     cartaapasar = tkvar.get()
+                    fuera = cartaapasar.replace(" ", "")
+                    cartas_jugador.remove(fuera)
+                    #update_gui(cartas_jugador)
                     cartaapasar = "cartapasar:" + cartaapasar
                     print(cartaapasar)
                     client_socket.send(bytes(cartaapasar, "utf8"))
-                #button2 = tkinter.Button(top, text="Pasar Carta", command=ok)
-                #button2.pack(side = tkinter.LEFT, expand=tkinter.YES)
+                button2 = tkinter.Button(top, text="Pasar Carta", command=ok)
+                button2.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
                 def not_ok():
                     client_socket.send(bytes("recibiendo", "utf8"))
