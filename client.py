@@ -118,7 +118,23 @@ def receive():
                     cartaapasar = "cartapasar:" + fuera
                     print(cartaapasar)
                     client_socket.send(bytes(cartaapasar, "utf8"))
-                button2 = tkinter.Button(top, text="Pasar Carta", command=ok)
+                
+                def refresheo(cartas):
+                    print(cartas)
+                    las_cartitas = []
+                    for i in range(len(CARDS)):
+                        if CARDS[i] in cartas_jugador:
+                            path = "cartas/" + CARDS[i] + ".png"
+                            las_cartitas.append(cart(path))
+                            for j in range(len(las_cartitas)): 
+                                las_cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES, ipady=10) 
+
+                    tkvar2 = tkinter.StringVar()
+                    tkvar2.set(cartas_jugador[0]) # set the default option
+                    popupMenu = OptionMenu(cart_frame, tkvar2, *cartas_jugador)
+                    popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
+
+                button2 = tkinter.Button(top, text="Pasar Carta", command=lambda:[ok(), delete_children(cart_frame), refresheo(cartas_jugador)])
                 button2.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
                 def not_ok():
