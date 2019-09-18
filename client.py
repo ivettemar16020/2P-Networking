@@ -41,21 +41,6 @@ def cart(path):
     val_cart.image = im2
     return val_cart
 
-def update_gui(cts_jugador): 
-    print("Deberian ser las mismas", cts_jugador)
-    las_cartitas = []
-    for i in range(len(CARDS)):
-        if CARDS[i] in cts_jugador:
-            path = "cartas/" + CARDS[i] + ".png"
-            las_cartitas.append(cart(path))
-            for j in range(len(las_cartitas)): 
-                las_cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES, ipady=10) 
-
-    tkvar = tkinter.StringVar()
-    tkvar.set(cts_jugador[0]) # set the default option
-    popupMenu = OptionMenu(cart_frame, tkvar, *cts_jugador)
-    popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
-
 def receive():
     while True:
         try:
