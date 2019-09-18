@@ -216,13 +216,8 @@ def handle_game(client, username, room):
             index = (index + 1) % lenght
             avisarturno = "Turno del Usuario:" + str(turno)
             client.sendto(bytes(messagedecode, "utf8"), client_dir[0])
-<<<<<<< HEAD
-            print("mensaje recibidio",msg, "de:", username)
-
-=======
             broadcast(bytes(avisarturno, "utf8"))
         print("mensaje recibidio",msg, "de:", username)
->>>>>>> 80ffd062d7a4c19b4b1e24f00772510c1926db23
         if msg != bytes("quit", "utf8"):
             broadcast(msg, username+": ")
 

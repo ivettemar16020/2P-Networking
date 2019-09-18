@@ -80,6 +80,7 @@ def receive():
                 popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
                 ganar(cartas_jugador)
+                #ganar(["4a", "4a", "4a", "4a"])
 
             if "user:" in msg:
                 file1 = open("user.txt","w")#write mode 
@@ -183,7 +184,8 @@ def ganar(cartas):
     c4 = list(cartas[3])[0]
     print("los valorcillos: ", c1, c2, c3, c4)
     if c1 == c2 == c3 == c4:
-        print("Ganaste, debes presionar el botons")
+        print("Ganaste, debes presionar el boton")
+        win_button.configure(state=tkinter.NORMAL)
     else: 
         print("Tu mano no es valida para ganar")
 
@@ -211,6 +213,14 @@ send_button = tkinter.Button(top, text="Send", command=send)
 send_button.pack()
 cart_frame = tkinter.Frame(top)
 cart_frame.pack(side=tkinter.LEFT, anchor=tkinter.CENTER)
+
+
+###GANAR BOTON 
+bottomframe = tkinter.Frame(top)
+bottomframe.pack( side=tkinter.BOTTOM, anchor=tkinter.SE)
+
+win_button = tkinter.Button(bottomframe, text="Cuchara", state=tkinter.DISABLED)
+win_button.pack(side=tkinter.RIGHT)
 
 top.protocol("WM_DELETE_WINDOW", on_closing)
 #HOST = '192.168.1.17' con el ipconfig de mi compu para conectarnos 
