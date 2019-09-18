@@ -26,6 +26,22 @@ global cartas_jugador
 cartas_jugador = []
 
 
+def popupHalp():
+
+    def leavemini():
+        popuphelp.destroy()
+
+    msg = "Instrucciones: Para ganar en Cuchara Online, usted tiene que formar una mano con cuatro cartas iguales. Para esto, debe desechar una carta por cada turno y pasársela al siguiente jugador. Si usted es el último jugador del turno, entonces solo pase la carta, esta irá al desecho. ¡Mucha suerte!"
+    popuphelp = tkinter.Tk()
+    popuphelp.wm_title("Instrucciones")
+    label = tkinter.Label(popuphelp, text=msg)
+    label.pack(side="top", fill="x", pady = 10)
+    b1 = tkinter.Button(popuphelp, text="OK", command=leavemini)
+    b1.pack()
+    popuphelp.mainloop()
+
+
+
 def delete_children(cart_frame):
     for child in cart_frame.winfo_children():
         child.destroy()
@@ -176,7 +192,7 @@ def on_closing(event=None):
     send()
 
 def snd1():
-    os.system("a.mp4")
+    os.system("b.mp4")
 
 def ganar(cartas):  
     c1 = list(cartas[0])[0]
@@ -231,6 +247,17 @@ spoon = ImageTk.PhotoImage(Image.open(imname).resize(size))
 win_button = tkinter.Button(bottomframe, image = spoon, state=tkinter.DISABLED)
 #win_button = tkinter.Button(bottomframe, image = spoon, state=tkinter.DISABLED, command = show_msg("Felicidades", "¡Ganaste el juego!"))
 win_button.pack(side=tkinter.RIGHT)
+
+upperframe = tkinter.Frame(top)
+upperframe.pack(side=tkinter.TOP, anchor=tkinter.NE)
+
+helpim = "assets/help.png"
+originim = Image.open(helpim).convert("1")
+sizes = (originim.width // 10, originim.height // 10)
+originim = ImageTk.BitmapImage(originim.resize(sizes))
+halpicon = ImageTk.PhotoImage(Image.open(helpim).resize(sizes))
+halpbutton = tkinter.Button(upperframe, image = halpicon, command=popupHalp)
+halpbutton.pack(side=tkinter.RIGHT)
 
 top.protocol("WM_DELETE_WINDOW", on_closing)
 #HOST = '192.168.1.17' con el ipconfig de mi compu para conectarnos 

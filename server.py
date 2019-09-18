@@ -29,6 +29,9 @@ client_dir = []
 users = []
 turnos = [1,2,3,4]
 index = 0
+discard = []
+rest = []
+
 print(' '.join(cartas))
 random.shuffle(cartas)
 print("REVOLVIENDO CARTAS... ", cartas)
@@ -148,7 +151,6 @@ def handle_game(client, username, room):
                 client.sendto(bytes(message1, "utf8"), client_dir[0])
                 client.sendto(bytes("\nPrueba solo para P1", "utf8"), client_dir[0])
                 cartas1 = cartas[n:]
-                print(cartas1)
                 print("jugador1", jugador1)
                 print("necesitas mas jugadores")
                 jugador1 = True
@@ -156,7 +158,15 @@ def handle_game(client, username, room):
         if contador == 2 and jugador2 == False:
             if jugador1 == False:
                 print(client_dir)
+                jugador1 = cartas[0:4]
                 jugador2 = cartas[4:8]
+                jugador3 = cartas[8:12]
+                for i in range(0, len(cartas)):
+                    if(cartas[i] not in jugador2 and cartas[i] not in jugador1):
+                        rest.append(cartas[i])
+                    else:
+                        pass
+                print("Este es rest con contador 2: ", rest)
                 jugador2 = (' '.join(jugador2))
                 jugador2 = "cards :" + jugador2
                 print("jugador2", jugador2)
@@ -164,12 +174,20 @@ def handle_game(client, username, room):
                 client.sendto(bytes(message2, "utf8"), client_dir[1])
                 client.sendto(bytes("\nPrueba solo para P2", "utf8"), client_dir[1])
                 cartas2 = cartas1[n:]
-                print(cartas2)
                 jugador2 = True
                 jugador1 = False
         if contador == 3 and jugador3 == False:
             if jugador2 == False and jugador1 == False:
+                rest.clear()
+                jugador1 = cartas[0:4]
+                jugador2 = cartas[4:8]
                 jugador3 = cartas[8:12]
+                for i in range(0, len(cartas)):
+                    if(cartas[i] not in jugador1 and cartas[i] not in jugador2 and cartas[i] not in jugador3):
+                        rest.append(cartas[i])
+                    else:
+                        pass
+                print("Este es rest con contador 3: ", rest)
                 jugador3 = (' '.join(jugador3))
                 jugador3 = "cards :" + jugador3
                 print("jugador3", jugador3)
@@ -183,7 +201,17 @@ def handle_game(client, username, room):
                 jugador1 = False
         if contador == 4 and jugador4 == False:
             if jugador3 == False and jugador2 == False and jugador1 == False:
+                rest.clear()
+                jugador1 = cartas[0:4]
+                jugador2 = cartas[4:8]
+                jugador3 = cartas[8:12]
                 jugador4 = cartas[12:16]
+                for i in range(0, len(cartas)):
+                    if(cartas[i] not in jugador1 and cartas[i] not in jugador2 and cartas[i] not in jugador3 and cartas[i] not in jugador4):
+                        rest.append(cartas[i])
+                    else:
+                        pass
+                print("Este es rest con contador 4: ", rest)
                 jugador4 = (' '.join(jugador4))
                 jugador4 = "cards :" + jugador4
                 print("jugador4", jugador4)
@@ -205,6 +233,11 @@ def handle_game(client, username, room):
             messagedecode = msg.decode("utf-8")
             messagedecode = messagedecode.replace('cartapasar:', '') 
             messagedecode = messagedecode.replace(" ", "")
+            carti = messagedecode
+            print("Este es carti: ", carti)
+            print("Este es carti adentro: ", carti)
+            discard.append(carti)
+            print("Este es el discard: ", discard)
             print("CARTA", messagedecode)
             messagedecode = "turno1"+ messagedecode
             print("CARTA RECIBIDA", messagedecode, username)
@@ -215,8 +248,30 @@ def handle_game(client, username, room):
             turno = turnos[index]
             index = (index + 1) % lenght
             avisarturno = "Turno del Usuario:" + str(turno)
-            client.sendto(bytes(messagedecode, "utf8"), client_dir[0])
-            broadcast(bytes(avisarturno, "utf8"))
+            if(contador == 2 and users.index(username) == 0):
+                new = rest[0]
+                newCard = "turno1" + new
+                client.sendto(bytes(newCard, "utf8"), client_dir[0])
+                rest.remove(new)
+            elif(contador == 3 and users.index(username) == 0):
+                print("Este es rest: ", rest)
+                new = rest[0]
+                newCard = "turno1" + new
+                client.sendto(bytes(newCard, "utf8"), client_dir[0])
+                rest.remove(new)
+            elif(contador == 4 and users.index(username) == 0):
+                #discard.append(carti)
+                #print("Este es el discard: ", discard)
+                print("Este es rest: ", rest)
+                new = rest[0]
+                print("Esta es la carta a pasar new: ", new)
+                newCard = "turno1" + new
+                client.sendto(bytes(newCard, "utf8"), client_dir[0])
+                rest.remove(new)
+            else:
+                client.sendto(bytes(messagedecode, "utf8"), client_dir[0])
+            #client.sendto(bytes(messagedecode, "utf8"), client_dir[0])
+            #broadcast(bytes(avisarturno, "utf8"))
         print("mensaje recibidio",msg, "de:", username)
         if msg != bytes("quit", "utf8"):
             broadcast(msg, username+": ")
