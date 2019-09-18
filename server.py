@@ -27,7 +27,8 @@ hall = ["Sala de prueba", "sala", "salita"]
 room = []
 client_dir = []
 users = []
-
+turnos = [1,2,3,4]
+index = 0
 print(' '.join(cartas))
 random.shuffle(cartas)
 print("REVOLVIENDO CARTAS... ", cartas)
@@ -221,7 +222,13 @@ def handle_game(client, username, room):
             #msg.replace('carta pasada b'cartapasar:', '')
             #client.sendto(bytes(msg, "utf8"))
         if msg == bytes("recibiendo", "utf8"):
+            global index
+            lenght = len(turnos)
+            turno = turnos[index]
+            index = (index + 1) % lenght
+            avisarturno = "Turno del Usuario:" + str(turno)
             client.sendto(bytes(messagedecode, "utf8"), client_dir[0])
+            broadcast(bytes(avisarturno, "utf8"))
         print("mensaje recibidio",msg, "de:", username)
         if msg != bytes("quit", "utf8"):
             broadcast(msg, username+": ")
