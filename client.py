@@ -24,6 +24,7 @@ miscartas = []
 global cartas_jugador
 cartas_jugador = []
 
+
 def delete_children(cart_frame):
     for child in cart_frame.winfo_children():
         child.destroy()
@@ -40,18 +41,19 @@ def cart(path):
     val_cart.image = im2
     return val_cart
 
-def update_gui(cartas_jugador): 
+def update_gui(cts_jugador): 
+    print("Deberian ser las mismas", cts_jugador)
     las_cartitas = []
     for i in range(len(CARDS)):
-        if CARDS[i] in cartas_jugador:
+        if CARDS[i] in cts_jugador:
             path = "cartas/" + CARDS[i] + ".png"
             las_cartitas.append(cart(path))
             for j in range(len(las_cartitas)): 
                 las_cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES, ipady=10) 
 
     tkvar = tkinter.StringVar()
-    tkvar.set(cartas_jugador[0]) # set the default option
-    popupMenu = OptionMenu(cart_frame, tkvar, *cartas_jugador)
+    tkvar.set(cts_jugador[0]) # set the default option
+    popupMenu = OptionMenu(cart_frame, tkvar, *cts_jugador)
     popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
 def receive():
@@ -64,7 +66,18 @@ def receive():
                 print("MIS CARTAS SON: ", cartas_jugador)
                 nueva_carta = msg.split("turno1")[1]
                 cartas_jugador.append(nueva_carta)
-                update_gui(cartas_jugador)
+                las_cartitas = []
+                for i in range(len(CARDS)):
+                    if CARDS[i] in cartas_jugador:
+                        path = "cartas/" + CARDS[i] + ".png"
+                        las_cartitas.append(cart(path))
+                        for j in range(len(las_cartitas)): 
+                            las_cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES, ipady=10) 
+
+                tkvar = tkinter.StringVar()
+                tkvar.set(cartas_jugador[0]) # set the default option
+                popupMenu = OptionMenu(cart_frame, tkvar, *cartas_jugador)
+                popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
             if "user:" in msg:
                 file1 = open("user.txt","w")#write mode 
@@ -95,14 +108,17 @@ def receive():
                 tkvar.set(cartasactuales) # set the default option
                 popupMenu = OptionMenu(cart_frame, tkvar, *choices)
                 popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
+
                 def ok():
                     cartasobtenidas = (' '.join(miscartas))
                     print("Estas son las cartas obtenidas:" + cartasobtenidas)
                     cartaapasar = tkvar.get()
                     fuera = cartaapasar.replace(" ", "")
+                    print("fuera", fuera)
+                    print("CARTAS JUGADOR ANTES: ", cartas_jugador)
                     cartas_jugador.remove(fuera)
-                    #update_gui(cartas_jugador)
-                    cartaapasar = "cartapasar:" + cartaapasar
+                    print("CARTAS JUGADOR DESPUES: ", cartas_jugador)
+                    cartaapasar = "cartapasar:" + fuera
                     print(cartaapasar)
                     client_socket.send(bytes(cartaapasar, "utf8"))
                 button2 = tkinter.Button(top, text="Pasar Carta", command=ok)
