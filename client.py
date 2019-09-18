@@ -28,13 +28,13 @@ def delete_children(cart_frame):
         child.destroy()
 
 def cart(path):
-    cart_frame.pack(side=tkinter.LEFT, anchor=tkinter.CENTER)
+    cart_frame.pack(side=tkinter.LEFT, anchor=tkinter.CENTER, padx=100)
     imname = path
     im1 = Image.open(imname).convert("1")
     size = (im1.width // 8, im1.height // 8)
     im1 = ImageTk.BitmapImage(im1.resize(size))
     im2 = ImageTk.PhotoImage(Image.open(imname).resize(size))
-    val_cart = tkinter.Label(cart_frame, image=im2, bd=10)
+    val_cart = tkinter.Button(cart_frame, image=im2, bd=0)
     #val_cart.pack(side = tkinter.LEFT, expand=tkinter.YES)
     val_cart.image = im2
     return val_cart
@@ -55,7 +55,7 @@ def receive():
                         path = "cartas/" + CARDS[i] + ".png"
                         las_cartitas.append(cart(path))
                         for j in range(len(las_cartitas)): 
-                            las_cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES)
+                            las_cartitas[j].pack(side = tkinter.LEFT, expand=tkinter.YES, ipady=10) 
                 print("MIS CARTAS NUEVAS SON: ", cartas_jugador)
 
             if "user:" in msg:
@@ -76,27 +76,27 @@ def receive():
                         cartas_jugador.append(CARDS[i])
                         print(*miscartas, sep = ", ")
                     
-                todascartas = (' '.join(miscartas))
-                print("TODAS LAS CARTAS", todascartas)
-                cartasactuales = (' '.join(miscartas[0]))
-                cartasactuales1 = (' '.join(miscartas[1]))
-                cartasactuales2 = (' '.join(miscartas[2]))
-                cartasactuales3 = (' '.join(miscartas[3]))
-                choices = {cartasactuales, cartasactuales1, cartasactuales2, cartasactuales3}
-                tkvar = tkinter.StringVar()
-                tkvar.set(cartasactuales) # set the default option
-                popupMenu = OptionMenu(top, tkvar, *choices)
-                popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
+                # todascartas = (' '.join(miscartas))
+                # print("TODAS LAS CARTAS", todascartas)
+                # cartasactuales = (' '.join(miscartas[0]))
+                # cartasactuales1 = (' '.join(miscartas[1]))
+                # cartasactuales2 = (' '.join(miscartas[2]))
+                # cartasactuales3 = (' '.join(miscartas[3]))
+                # choices = {cartasactuales, cartasactuales1, cartasactuales2, cartasactuales3}
+                # tkvar = tkinter.StringVar()
+                # tkvar.set(cartasactuales) # set the default option
+                # popupMenu = OptionMenu(top, tkvar, *choices)
+                # popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
                 def ok():
                     #print ("Carta", tkvar.get())
                     cartasobtenidas = (' '.join(miscartas))
-                    print(cartasobtenidas)
+                    print("Estas son las cartas obtenidas:" + cartasobtenidas)
                     cartaapasar = tkvar.get()
                     cartaapasar = "cartapasar:" + cartaapasar
                     print(cartaapasar)
                     client_socket.send(bytes(cartaapasar, "utf8"))
-                button2 = tkinter.Button(top, text="Pasar Carta", command=ok)
-                button2.pack(side = tkinter.LEFT, expand=tkinter.YES)
+                #button2 = tkinter.Button(top, text="Pasar Carta", command=ok)
+                #button2.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
                 def not_ok():
                     client_socket.send(bytes("recibiendo", "utf8"))
