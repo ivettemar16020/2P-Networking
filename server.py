@@ -207,26 +207,16 @@ def handle_game(client, username, room):
             print("CARTA", messagedecode)
             messagedecode = "turno1"+ messagedecode
             print("CARTA RECIBIDA", messagedecode, username)
-            #finduser = users.index(username)
-            #print("INDICE DEL USER", finduser)
-            #print("DEBUGEANDO", client_dir)
-            #print("DEBUGEANDO2", client_dir[0] )
-            #print("DEBUGEANDO2a", client_dir[finduser] )
-            #print("DEBUGEANDO3", client_dir[1] )
-            #finduser = finduser + 1
-            #print("DEBUGEANDO4a", client_dir[finduser])
-            #buscar porque solo se envia a si mismo
-            # client.sendto(bytes(messagedecode, "utf8"), client_dir[finduser])
-            #client.sendto(bytes(messagedecode, "utf8"), client_dir[finduser-1])
-            #msg.replace('carta pasada b'cartapasar:', '')
-            #client.sendto(bytes(msg, "utf8"))
+
         if msg == bytes("recibiendo", "utf8"):
             client.sendto(bytes(messagedecode, "utf8"), client_dir[0])
-        print("mensaje recibidio",msg, "de:", username)
+            print("mensaje recibidio",msg, "de:", username)
+
         if msg != bytes("quit", "utf8"):
             broadcast(msg, username+": ")
+
         else:
-            client.send(bytes("{quit}", "utf8"))
+            client.send(bytes("quit", "utf8"))
             client.close()
             del clients[client]
             broadcast(bytes("%s se ha retirado del juego" % username, "utf8"))
@@ -242,6 +232,7 @@ def send_to():
         print(client_dir[0])
         print(client_dir[1])
         sock.sendto(bytes("Mensaje para USUARIO No.1 SOLAMENTE!", "utf8"), client_dir[0])
+
 
 clients = {}
 addresses = {}

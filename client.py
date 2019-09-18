@@ -76,6 +76,8 @@ def receive():
                 popupMenu = OptionMenu(cart_frame, tkvar, *cartas_jugador)
                 popupMenu.pack(side = tkinter.LEFT, expand=tkinter.YES)
 
+                ganar(cartas_jugador)
+
             if "user:" in msg:
                 file1 = open("user.txt","w")#write mode 
                 file1.write(msg) 
@@ -167,8 +169,20 @@ def send(event=None):
 def on_closing(event=None):
     my_msg.set("quit")
     send()
+
 def snd1():
     os.system("a.mp4")
+
+def ganar(cartas):  
+    c1 = list(cartas[0])[0]
+    c2 = list(cartas[1])[0]
+    c3 = list(cartas[2])[0]
+    c4 = list(cartas[3])[0]
+    print("los valorcillos: ", c1, c2, c3, c4)
+    if c1 == c2 == c3 == c4:
+        print("Ganaste, debes presionar el botons")
+    else: 
+        print("Tu mano no es valida para ganar")
 
 top = tkinter.Tk()
 top.title("Cuchara Online")
