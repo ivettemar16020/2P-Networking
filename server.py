@@ -247,7 +247,7 @@ def handle_game(client, username, room):
             lenght = len(turnos)
             turno = turnos[index]
             index = (index + 1) % lenght
-            avisarturno = "Turno del Usuario:" + str(turno)
+            avisarturno = "Paso el Usuario:" + str(turno) + "Le toca al siguiente usuario"
             if(contador == 2 and users.index(username) == 0):
                 new = rest[0]
                 newCard = "turno1" + new
@@ -271,7 +271,7 @@ def handle_game(client, username, room):
             else:
                 client.sendto(bytes(messagedecode, "utf8"), client_dir[0])
             #client.sendto(bytes(messagedecode, "utf8"), client_dir[0])
-            #broadcast(bytes(avisarturno, "utf8"))
+            broadcast(bytes(avisarturno, "utf8"))
         print("mensaje recibidio",msg, "de:", username)
         if msg != bytes("quit", "utf8"):
             broadcast(msg, username+": ")
