@@ -262,7 +262,8 @@ halpbutton.pack(side=tkinter.RIGHT)
 
 top.protocol("WM_DELETE_WINDOW", on_closing)
 #HOST = '192.168.1.17' con el ipconfig de mi compu para conectarnos 
-HOST = '127.0.0.1'
+#HOST = '127.0.0.1'
+HOST = '10.200.100.112'
 PORT = 33000
 if not PORT:
     PORT = 33000

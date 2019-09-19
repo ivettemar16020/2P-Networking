@@ -298,7 +298,8 @@ def send_to():
 clients = {}
 addresses = {}
 #HOST = '192.168.1.17' con el ifconfig de mi computadora
-HOST = '127.0.0.1'
+#HOST = '127.0.0.1'
+HOST = '10.200.100.112'
 PORT = 33000
 BUFSIZ = 1024
 ADDR = (HOST, PORT)
